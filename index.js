@@ -15,7 +15,8 @@ client.on("clientReady", () => {
 client.on("messageCreate", (message) => {
 	if (message.channel.id == process.env.CHANNEL_ID) {
 		if(whitelisted.includes(message.author.id)) return;
-		message.author.ban({ days:7, reason: "Hacked account" });
+		const user = client.users.cache.get(message.author.id);
+		user.ban({ days:7, reason: "Hacked account" });
 	}
 });
 client.login(process.env.TOKEN);
