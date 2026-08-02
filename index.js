@@ -14,7 +14,7 @@ client.on("clientReady", () => {
 
 client.on("messageCreate", (message) => {
 	if (message.channel.id == process.env.CHANNEL_ID) {
-		message.author.ban({ reason: "Hacked account" });
+		message.author.ban({ days:7, reason: "Hacked account" });
 	}
 });
 client.login(process.env.TOKEN);
