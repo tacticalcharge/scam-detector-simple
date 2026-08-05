@@ -18,4 +18,12 @@ client.on("messageCreate", (message) => {
 		message.guild.members.ban(message.author.id, { deleteMessageSeconds: 7 * 24 * 60 * 60, reason: "Hacked account" });
 	}
 });
+
+// Boost Detection System (For Coreflux)
+client.on("guidMemberUpdate", (oldMember, newMember) => {
+	const startedBoosting = !oldMember.premiumSince && newMember.premiumSince;
+	if (startedBoosting) {
+		newMember.roles.cache.add(process.env.BOOSTER_ROLE_ID);
+	}
+})
 client.login(process.env.TOKEN);
